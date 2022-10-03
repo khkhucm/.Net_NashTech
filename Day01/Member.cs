@@ -2,44 +2,50 @@ namespace Day01
 {
     public enum Gender
     {
-        MALE,
-        FEMALE,
-        OTHER
+        Male,
+        Female,
+        Other
     }
     public class Member
     {
-        public String firstName { get; set; }
-        public String lastName { get; set; }
-        public Gender gender { get; set; }
-        public DateTime dateOfBirth { get; set; }
-        public String phoneNumber { get; set; }
-        public String birthPlace { get; set; }
-        public int age { get; set; }
-        public bool isGraduated { get; set; }
-        public Member(String firstName, String lastName, Gender gender, DateTime dateOfBirth, String phoneNumber, String birthPlace, int age, bool isGraduated)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.gender = gender;
-            this.dateOfBirth = dateOfBirth;
-            this.phoneNumber = phoneNumber;
-            this.birthPlace = birthPlace;
-            this.age = age;
-            this.isGraduated = isGraduated;
-        }
-
-        public string getInfo
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public Gender Gender { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public String PhoneNumber { get; set; }
+        public String BirthPlace { get; set; }
+        public int Age
         {
             get
             {
-                return string.Format($"First Name: {firstName}" + Environment.NewLine +
-                $"Last Name: {lastName}" + Environment.NewLine +
-                $"Gender: {gender}" + Environment.NewLine +
-                $"Date Of Birth: {dateOfBirth}" + Environment.NewLine +
-                $"Phone Number: {phoneNumber}" + Environment.NewLine +
-                $"Birth Place: {birthPlace}" + Environment.NewLine +
-                $"Age: {age}" + Environment.NewLine +
-                $"Is Graduated: {isGraduated}");
+                return DateTime.Now.Year - DateOfBirth.Year;
+            }
+        }
+        public bool IsGraduated { get; set; }
+        public Member(String FirstName, String LastName, Gender Gender, DateTime DateOfBirth, String PhoneNumber, String BirthPlace, bool IsGraduated)
+        {
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            this.Gender = Gender;
+            this.DateOfBirth = DateOfBirth;
+            this.PhoneNumber = PhoneNumber;
+            this.BirthPlace = BirthPlace;
+            this.IsGraduated = IsGraduated;
+        }
+
+        public string GetInfo
+        {
+            get
+            {
+                return string.Format($"First Name: {FirstName}" + Environment.NewLine +
+                $"Last Name: {LastName}" + Environment.NewLine +
+                $"Gender: {Gender}" + Environment.NewLine +
+                $"Date Of Birth: {DateOfBirth}" + Environment.NewLine +
+                $"Phone Number: {PhoneNumber}" + Environment.NewLine +
+                $"Birth Place: {BirthPlace}" + Environment.NewLine +
+                $"Age: {Age}" + Environment.NewLine +
+                $"Is Graduated: {IsGraduated}" + Environment.NewLine+
+                $"--------------------------------------------");
             }
         }
     }
