@@ -1,0 +1,15 @@
+D:\New folder\Day02\bin\Debug\net6.0\Day02.exe
+D:\New folder\Day02\bin\Debug\net6.0\Day02.deps.json
+D:\New folder\Day02\bin\Debug\net6.0\Day02.runtimeconfig.json
+D:\New folder\Day02\bin\Debug\net6.0\Day02.dll
+D:\New folder\Day02\bin\Debug\net6.0\Day02.pdb
+D:\New folder\Day02\obj\Debug\net6.0\Day02.csproj.AssemblyReference.cache
+D:\New folder\Day02\obj\Debug\net6.0\Day02.GeneratedMSBuildEditorConfig.editorconfig
+D:\New folder\Day02\obj\Debug\net6.0\Day02.AssemblyInfoInputs.cache
+D:\New folder\Day02\obj\Debug\net6.0\Day02.AssemblyInfo.cs
+D:\New folder\Day02\obj\Debug\net6.0\Day02.csproj.CoreCompileInputs.cache
+D:\New folder\Day02\obj\Debug\net6.0\Day02.dll
+D:\New folder\Day02\obj\Debug\net6.0\refint\Day02.dll
+D:\New folder\Day02\obj\Debug\net6.0\Day02.pdb
+D:\New folder\Day02\obj\Debug\net6.0\Day02.genruntimeconfig.cache
+D:\New folder\Day02\obj\Debug\net6.0\ref\Day02.dll
