@@ -102,11 +102,11 @@
         }
         public static void Main()
         {
-            Member m1 = new Member("Dong", "Nguyen", Gender.Male, new DateTime(1995, 12, 10), "1", "Ha Nam", true);
-            Member m2 = new Member("Duc", "Dam", Gender.Male, new DateTime(2012, 01, 02), "2", "Ha Giang", false);
-            Member m3 = new Member("Kien", "Tran", Gender.Male, new DateTime(2008, 04, 21), "3", "Ha Noi", true);
-            Member m4 = new Member("Binh", "Pham", Gender.Female, new DateTime(2000, 11, 25), "4", "Ha Nam", true);
-            Member m5 = new Member("An", "Tran", Gender.Female, new DateTime(2002, 12, 25), "5", "Nam Dinh", false);
+            Member m1 = new Member("Dong", "Nguyen", Gender.Male, new DateTime(1995, 12, 10), "01234567432", "Ha Nam", true);
+            Member m2 = new Member("Duc", "Dam", Gender.Male, new DateTime(2012, 01, 02), "123421042123", "Ha Giang", false);
+            Member m3 = new Member("Kien", "Tran", Gender.Male, new DateTime(2008, 04, 21), "3212990221", "Ha Noi", true);
+            Member m4 = new Member("Binh", "Pham", Gender.Female, new DateTime(2000, 11, 25), "1289012342", "Ha Nam", true);
+            Member m5 = new Member("An", "Tran", Gender.Female, new DateTime(2002, 12, 25), "09821942142", "Nam Dinh", false);
             List<Member> members = new List<Member>();
             List<String> fullNameMembers = new List<String>();
             int option = 0;
