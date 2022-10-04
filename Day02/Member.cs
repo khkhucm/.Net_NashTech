@@ -21,19 +21,25 @@ namespace Day02
                 return DateTime.Now.Year - DateOfBirth.Year;
             }
         }
-        public bool IsGraduated { get; set; }
-        public Member(String FirstName, String LastName, Gender Gender, DateTime DateOfBirth, String PhoneNumber, String BirthPlace, bool IsGraduated)
+        public string FullName
         {
-            this.FirstName = FirstName;
-            this.LastName = LastName;
-            this.Gender = Gender;
-            this.DateOfBirth = DateOfBirth;
-            this.PhoneNumber = PhoneNumber;
-            this.BirthPlace = BirthPlace;
-            this.IsGraduated = IsGraduated;
+            get
+            {
+                return FirstName + " " + LastName;
+            }
         }
-
-        public string GetInfo
+        public bool IsGraduated { get; set; }
+        public Member(String firstName, String lastName, Gender gender, DateTime dateOfBirth, String phoneNumber, String birthPlace, bool isGraduated)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Gender = gender;
+            this.DateOfBirth = dateOfBirth;
+            this.PhoneNumber = phoneNumber;
+            this.BirthPlace = birthPlace;
+            this.IsGraduated = isGraduated;
+        }
+        public string Info
         {
             get
             {
@@ -44,7 +50,7 @@ namespace Day02
                 $"Phone Number: {PhoneNumber}" + Environment.NewLine +
                 $"Birth Place: {BirthPlace}" + Environment.NewLine +
                 $"Age: {Age}" + Environment.NewLine +
-                $"Is Graduated: {IsGraduated}" + Environment.NewLine+
+                $"Is Graduated: {IsGraduated}" + Environment.NewLine +
                 $"--------------------------------------------");
             }
         }
