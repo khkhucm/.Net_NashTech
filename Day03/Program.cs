@@ -1,35 +1,45 @@
-﻿namespace Day03
+﻿using Day03.Events;
+
+namespace Day03
 {
     class Program
     {
-        static void ShowTime(DetailClock detailClock)
+        public static void Subcribe(Clock clock)
         {
-            Console.WriteLine(detailClock);
+            clock.eventClock += new delegateClock(ShowClock);
         }
-        static async void PrimeNumber(int firstNumb, int lastNumb)
+        public static void ShowClock(object clock, ClockInfo clockInfo)
+        {
+            Console.WriteLine(clockInfo);
+        }
+        static async Task PrimeNumber(int firstNumb, int lastNumb)
         {
             bool checkPrime = true;
 
-            for (int i = firstNumb; i < lastNumb; i++)
+            await Task.Run(async () =>
             {
-                checkPrime = true;
-                if (i > 1)
+                for (int i = firstNumb; i < lastNumb; i++)
                 {
-                    for (int j = 2; j < i; j++)
+                    checkPrime = true;
+                    if (i > 1)
                     {
-                        if (i % j == 0)
+                        for (int j = 2; j < i; j++)
                         {
-                            checkPrime = false;
-                            break;
+                            if (i % j == 0)
+                            {
+                                checkPrime = false;
+                                break;
+                            }
+                        }
+                        if (checkPrime)
+                        {
+                            Console.Write(i + " ");
+                            await Task.Delay(200);
                         }
                     }
-                    if (checkPrime)
-                    {
-                        Console.Write(i + " ");
-                        await Task.Delay(500);
-                    }
                 }
-            }
+            });
+
         }
         public static void Main()
         {
@@ -47,17 +57,12 @@
                 switch (option)
                 {
                     case "1":
-                        clock.eventClock += new delegateClock(ShowTime);
-                        while (!Console.KeyAvailable)
-                        {
-                            clock.Timer();
-                            Thread.Sleep(1000);
-                            Console.Clear();
-                        }
+                        Subcribe(clock);
+                        clock.ShowTime();
                         break;
                     case "2":
-                        PrimeNumber(0, 50);
-                        PrimeNumber(51, 100);
+                        PrimeNumber(0, 100);
+                        PrimeNumber(100, 200);
                         break;
                 }
                 Console.ReadKey();

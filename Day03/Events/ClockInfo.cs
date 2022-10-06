@@ -1,9 +1,8 @@
-﻿
-namespace Day03
+﻿namespace Day03.Events
 {
-    public class DetailClock
+    public class ClockInfo : EventArgs
     {
-        public DetailClock(int year, int month, int day, int hour, int minute, int second)
+        public ClockInfo(int year, int month, int day, int hour, int minute, int second)
         {
             Year = year;
             Month = month;
@@ -22,13 +21,13 @@ namespace Day03
 
         public override string ToString()
         {
-            String month = Month.ToString("D2");
-            String day = Day.ToString("D2");
-            String hour = Hour.ToString("D2");
-            String minute = Minute.ToString("D2");
-            String second = Second.ToString("D2");
+            string month = Month.ToString("D2");
+            string day = Day.ToString("D2");
+            string hour = Hour.ToString("D2");
+            string minute = Minute.ToString("D2");
+            string second = Second.ToString("D2");
 
-            return String.Format($"{month}/{day}/{Year}\r\n" +
+            return string.Format($"{month}/{day}/{Year}\r\n" +
                 $"{hour}:{minute}:{second}");
         }
     }
