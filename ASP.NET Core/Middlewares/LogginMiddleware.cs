@@ -22,7 +22,7 @@ namespace ASP.NET_Core.Middlewares
             Debug.Write(requestInfo);
             WriteToFileByStream("./", "result.txt", requestInfo);
             //File.WriteAllText("./result.txt", requestInfo);
-            
+
             await _requestDelegate(context);
         }
 
