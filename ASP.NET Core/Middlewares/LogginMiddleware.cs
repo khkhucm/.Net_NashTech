@@ -14,11 +14,11 @@ namespace ASP.NET_Core.Middlewares
             var request = context.Request;
             var respone = context.Response;
 
-            string requestInfo = "Schema " + request.Scheme +
-            "\r\nHost " + request.Host +
-            "\r\nPath " + request.Path +
-            "\r\nQueryString " + request.QueryString +
-            "\r\nBody " + request.Body;
+            string requestInfo = "Schema: " + request.Scheme +
+            "\r\nHost: " + request.Host +
+            "\r\nPath: " + request.Path +
+            "\r\nQueryString: " + request.QueryString +
+            "\r\nBody: " + request.Body;
             Debug.Write(requestInfo);
             WriteToFileByStream("./", "result.txt", requestInfo);
             //File.WriteAllText("./result.txt", requestInfo);
