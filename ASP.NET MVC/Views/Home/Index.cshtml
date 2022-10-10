@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ASP.NET_MVC.DataAccess.Person>
+
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<div><b>Table Format Data Displaying in ForEach</b><br /></div>
+	<table class="table table-bordered table-responsive table-hover">
+		<tr>
+			<th>FirstName </th>
+			<th>LastName </th>
+			<th>Gender </th>
+			<th>DateOfBirth</th>
+			<th>PhoneNumber</th>
+			<th>BirthPlace</th>
+			<th>IsGraduated</th>
+		</tr>
+		@*  @foreach (var d in Model)
+		{
+		<tr>
+		<td>@d.FirstName</td>
+		<td>@d.LastName</td>
+		<td>@d.Gender</td>
+		<td>@d.DateOfBirth</td>
+		<td>@d.PhoneNumber</td>
+		<td>@d.BirthPlace</td>
+		<td>@d.IsGraduated</td>
+		</tr>
+		}*@
+	</table>
+
+</div>

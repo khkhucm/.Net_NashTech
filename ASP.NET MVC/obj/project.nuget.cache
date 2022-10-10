@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5k4Q1AmJaw+g/nv49wy7IU7KhBC2GdE5+ZdxTaYozoaPKD+tCaUgshmoLxwFIFR7Fz3wpzih6cJH9Xw+pShHCA==",
+  "success": true,
+  "projectFilePath": "D:\\New folder\\ASP.NET MVC\\ASP.NET MVC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\csvhelper\\29.0.0\\csvhelper.29.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
