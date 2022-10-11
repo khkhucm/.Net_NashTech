@@ -74,26 +74,72 @@ namespace ASP.NET_Core__2.Controllers
         [HttpPost]
         public IActionResult Create(PersonCreateModel model)
         {
-            if (ModelState.IsValid){
-            var person = new PersonModel
+            if (ModelState.IsValid)
             {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Gender = model.Gender,
-                DateOfBirth = model.DateOfBirth,
-                BirthPlace = model.BirthPlace,
-                PhoneNumber = model.PhoneNumber,
-                IsGraduated = false,
-            };
-            people.Add(person);
-            foreach (var i in people)
-            {
-                Console.WriteLine(i.FirstName);
-            }
-
+                var person = new PersonModel
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Gender = model.Gender,
+                    DateOfBirth = model.DateOfBirth,
+                    BirthPlace = model.BirthPlace,
+                    PhoneNumber = model.PhoneNumber,
+                    IsGraduated = false,
+                };
+                people.Add(person);
                 return RedirectToAction("Index");
             }
+            
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int index)
+        {
+            if (index >= 0 && index < people.Count)
+            {
+                var person = people[index];
+                var model = new PersonUpdateModel
+                {
+                    FirstName = person.FirstName,
+                    LastName = person.LastName,
+                    PhoneNumber = person.PhoneNumber,
+                    BirthPlace = person.BirthPlace
+                };
+                ViewData["Index"] = index;
+                return View(model);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Update(int index, PersonUpdateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (index >= 0 && index < people.Count)
+                {
+                    var person = people[index];
+                    person.FirstName = model.FirstName;
+                    person.LastName = model.LastName;
+                    person.PhoneNumber = model.PhoneNumber;
+                    person.BirthPlace = model.BirthPlace;
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int index)
+        {
+            if (index >= 0 && index < people.Count)
+            {
+                people.RemoveAt(index);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
