@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace ASP.NET_MVC__3.Services
+namespace ASP.NET_MVC__3.Models
 {
     public class EditPersonViewModel
     {

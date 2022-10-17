@@ -1,4 +1,4 @@
-using ASP.NET_MVC__3.DataAccess;
+using ASP.NET_MVC__3.Models;
 
 namespace ASP.NET_MVC__3.Services
 {

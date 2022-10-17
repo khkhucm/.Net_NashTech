@@ -1,5 +1,5 @@
 using ASP.NET_MVC__3.DataAccess;
-
+using ASP.NET_MVC__3.Models;
 namespace ASP.NET_MVC__3.Services
 {
     public class PersonService : IServices
@@ -88,7 +88,6 @@ namespace ASP.NET_MVC__3.Services
         {
             _dataAccess.DeletePerson(index);
         }
-
 
     }
 }

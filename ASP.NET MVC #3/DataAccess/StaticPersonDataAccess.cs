@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ASP.NET_MVC__3.Models;
 
 namespace ASP.NET_MVC__3.DataAccess
 {
-     public class StaticPersonDataAccess : IDataAccess
+    public class StaticPersonDataAccess : IDataAccess
     {
-         public static List<Person> people = new List<Person>{
+        private static List<Person> _people = new List<Person>{
             new Person{
                     FirstName = "Binh",
                     LastName = "Truong Van",
@@ -58,10 +55,10 @@ namespace ASP.NET_MVC__3.DataAccess
 
         public List<Person> Persons
         {
-            get => people;
+            get => _people;
             set
             {
-                people = value;
+                _people = value;
             }
         }
 
