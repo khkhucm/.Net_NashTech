@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\New folder\\EntityFramwork\\Assignment01\\Assignment01.csproj": {}
+    "D:\\New folder\\EntityFramework\\Assignment01\\Assignment01.csproj": {}
   },
   "projects": {
-    "D:\\New folder\\EntityFramwork\\Assignment01\\Assignment01.csproj": {
+    "D:\\New folder\\EntityFramework\\Assignment01\\Assignment01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\New folder\\EntityFramwork\\Assignment01\\Assignment01.csproj",
+        "projectUniqueName": "D:\\New folder\\EntityFramework\\Assignment01\\Assignment01.csproj",
         "projectName": "Assignment01",
-        "projectPath": "D:\\New folder\\EntityFramwork\\Assignment01\\Assignment01.csproj",
+        "projectPath": "D:\\New folder\\EntityFramework\\Assignment01\\Assignment01.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\New folder\\EntityFramwork\\Assignment01\\obj\\",
+        "outputPath": "D:\\New folder\\EntityFramework\\Assignment01\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

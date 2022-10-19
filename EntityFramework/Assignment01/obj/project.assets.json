@@ -2194,11 +2194,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\New folder\\EntityFramwork\\Assignment01\\Assignment01.csproj",
+      "projectUniqueName": "d:\\New folder\\EntityFramework\\Assignment01\\Assignment01.csproj",
       "projectName": "Assignment01",
-      "projectPath": "D:\\New folder\\EntityFramwork\\Assignment01\\Assignment01.csproj",
+      "projectPath": "d:\\New folder\\EntityFramework\\Assignment01\\Assignment01.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "D:\\New folder\\EntityFramwork\\Assignment01\\obj\\",
+      "outputPath": "d:\\New folder\\EntityFramework\\Assignment01\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

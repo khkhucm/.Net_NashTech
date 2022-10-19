@@ -9,6 +9,6 @@ namespace Assignment01.Services.Interfaces
         AddStudentResponse? GetById(int id);
         AddStudentResponse Create(AddStudentRequest createModel);
         AddStudentResponse? Update(int id, AddStudentRequest updateModel);
-
+        AddStudentResponse? Delete(int id);
     }
 }

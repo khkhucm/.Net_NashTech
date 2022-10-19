@@ -64,5 +64,18 @@ namespace Assignment01.Controllers
                 return null!;
             }
         }
+    
+        [HttpDelete("{id}")]
+        public AddStudentResponse? Delete(int id){
+            try{
+                var deleteStudent = _studentService.Delete(id);
+
+                return deleteStudent;
+            }
+            catch (Exception ex)
+            {
+                return null!;
+            }
+        }
     }
 }

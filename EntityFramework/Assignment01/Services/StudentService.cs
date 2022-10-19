@@ -71,5 +71,18 @@ namespace Assignment01.Services
                 FirstName = student.FirstName
             };
         }
+
+        public AddStudentResponse? Delete(int id){
+            var deleteStudent = _studentRepository.Get(x => x.Id == id);
+            var student = _studentRepository.Delete(deleteStudent);
+
+            _studentRepository.SaveChanges();
+
+                return new AddStudentResponse
+            {
+                Id = deleteStudent.Id,
+                FirstName = deleteStudent.FirstName
+            };
+        }
     }
 }
