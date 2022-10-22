@@ -18,9 +18,11 @@ builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+
 builder.Services.AddDbContext<ProductStoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnString")));
-    
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

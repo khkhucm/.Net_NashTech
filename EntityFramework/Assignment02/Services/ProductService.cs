@@ -22,6 +22,7 @@ namespace Assignment02.Services
                 try
                 {
                     var category = _cateRepository.Get(cat => cat.Id == addModel.CategoryId);
+
                     if (category != null)
                     {
                         var addProduct = new Product
@@ -32,6 +33,7 @@ namespace Assignment02.Services
                         };
 
                         var newProduct = _repository.Create(addProduct);
+
                         _repository.SaveChanges();
 
                         _trancsation.Commit();

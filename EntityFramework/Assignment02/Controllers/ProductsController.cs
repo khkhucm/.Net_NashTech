@@ -36,7 +36,7 @@ namespace Assignment02.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "GetById")]
+        [HttpGet("{id}")]
         public ProductViewModel? Get(int id)
         {
             try
@@ -80,6 +80,5 @@ namespace Assignment02.Controllers
                 return null!;
             }
         }
-
     }
 }

@@ -4,6 +4,5 @@ namespace Assignment02.Repositories
 {
     public interface ICategoryRepository : IBaseRepository<Category>
     {
-
     }
 }

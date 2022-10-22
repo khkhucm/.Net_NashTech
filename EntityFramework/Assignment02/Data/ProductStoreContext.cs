@@ -7,8 +7,8 @@ namespace Assignment02.Data
     {
         public ProductStoreContext(DbContextOptions<ProductStoreContext> options) : base(options)
         {
-
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>()
@@ -30,10 +30,6 @@ namespace Assignment02.Data
             modelBuilder.Entity<Product>()
                             .ToTable("Product")
                             .HasKey(p => p.Id);
-            // modelBuilder.Entity<Product>()
-            //                 .HasOne<Category>(p => p.Category)
-            //                 .WithMany(p => p.Products)
-            //                 .HasForeignKey(p => p.CategoryID);
             modelBuilder.Entity<Product>()
                             .Property(p => p.Id)
                             .HasColumnName("ProductId")
@@ -56,6 +52,7 @@ namespace Assignment02.Data
                             .HasColumnName("CategoryId")
                             .HasColumnType("int")
                             .IsRequired();
+
             modelBuilder.Entity<Category>()
                             .HasData(new Category
                             {
@@ -63,17 +60,18 @@ namespace Assignment02.Data
                                 CategoryName = "Computer"
                             });
             modelBuilder.Entity<Product>()
-                .HasData(new Product
-                {
-                    Id = 1,
-                    ProductName = "Computer",
-                    CategoryId =1,
-                    Manufacture = "Test"
-                });
+                            .HasData(new Product
+                            {
+                                Id = 1,
+                                ProductName = "Computer",
+                                CategoryId = 1,
+                                Manufacture = "Test"
+                            });
 
         }
 
         public DbSet<Category> Categories { get; set; } = null!;
+        
         public DbSet<Product> Products { get; set; } = null!;
     }
 }
