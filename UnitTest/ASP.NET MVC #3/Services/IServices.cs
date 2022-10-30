@@ -1,0 +1,14 @@
+using ASP.NET_MVC__3.Models;
+
+namespace ASP.NET_MVC__3.Services
+{
+    public interface IServices
+    {
+        List<PersonViewModel> GetListPerson();
+        Person GetOnePerson(int index);
+        void AddPerson(CreatePersonRequest request);
+        List<EditPersonViewModel> GetListEdit();
+        void UpdatePerson(int index, EditPersonViewModel model);
+        Person DeletePerson(int index);
+    }
+}
