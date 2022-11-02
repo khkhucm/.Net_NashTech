@@ -1,6 +1,5 @@
 using Assignment02.Models;
 using Assignment02.Services.Interfaces;
-using Assignment02.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Assignment02.Controllers

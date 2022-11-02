@@ -18,6 +18,7 @@ namespace Assignment02.Services
             new PersonModel("Anh", "Le", new DateTime(2000, 03, 16), "Male", "Bac Giang"),
             new PersonModel("Hoa", "La", new DateTime(1993, 03, 24), "Female", "Nam Dinh"),
         };
+
         public PersonModel? Create(PersonCreateModel createModel)
         {
             var newPerson = new PersonModel
