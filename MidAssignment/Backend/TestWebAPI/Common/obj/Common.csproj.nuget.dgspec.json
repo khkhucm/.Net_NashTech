@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj": {}
+    "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj": {}
   },
   "projects": {
-    "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj": {
+    "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj",
+        "projectUniqueName": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj",
+        "projectPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\obj\\",
+        "outputPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

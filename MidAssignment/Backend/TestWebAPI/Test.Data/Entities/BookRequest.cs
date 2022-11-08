@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Test.Data.Entities
 {
-    public class BookBorrowingRequest
+    public class BookRequest
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -15,7 +15,7 @@ namespace Test.Data.Entities
         public RequestBookStatus Status { get; set; }
         public User? RejectedBy { get; set; }
         public User? ApprovedBy { get; set; }
-        public ICollection<BookBorrowingRequestDetail>? BookBorrowingRequestDetails { get; set; }
+        public ICollection<BookRequestDetail>? BookRequestDetails { get; set; }
         public ICollection<Book>? Books { get; set; }
     }
 }

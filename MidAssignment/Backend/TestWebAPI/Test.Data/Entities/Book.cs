@@ -11,6 +11,6 @@ namespace Test.Data.Entities
         public string BookName { get; set; }
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
-        public ICollection<BookBorrowingRequest>? BookBorrowingRequests { get; set; }
+        public ICollection<BookRequest>? BookRequests { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using Test.Data;
 namespace Test.Data.Migrations
 {
     [DbContext(typeof(TestContext))]
-    [Migration("20221107024212_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20221107070529_FirstMigration_AddEntities")]
+    partial class FirstMigration_AddEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,19 +24,19 @@ namespace Test.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BookBookBorrowingRequest", b =>
+            modelBuilder.Entity("BookBookRequest", b =>
                 {
-                    b.Property<int>("BookBorrowingRequestsRequestId")
+                    b.Property<int>("BookRequestsRequestId")
                         .HasColumnType("int");
 
                     b.Property<int>("BooksBookId")
                         .HasColumnType("int");
 
-                    b.HasKey("BookBorrowingRequestsRequestId", "BooksBookId");
+                    b.HasKey("BookRequestsRequestId", "BooksBookId");
 
                     b.HasIndex("BooksBookId");
 
-                    b.ToTable("BookBookBorrowingRequest");
+                    b.ToTable("BookBookRequest");
                 });
 
             modelBuilder.Entity("Test.Data.Entities.Book", b =>
@@ -99,7 +99,7 @@ namespace Test.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Test.Data.Entities.BookBorrowingRequest", b =>
+            modelBuilder.Entity("Test.Data.Entities.BookRequest", b =>
                 {
                     b.Property<int>("RequestId")
                         .ValueGeneratedOnAdd()
@@ -130,10 +130,10 @@ namespace Test.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BookBorrowingRequests", (string)null);
+                    b.ToTable("BookRequests", (string)null);
                 });
 
-            modelBuilder.Entity("Test.Data.Entities.BookBorrowingRequestDetail", b =>
+            modelBuilder.Entity("Test.Data.Entities.BookRequestDetail", b =>
                 {
                     b.Property<int>("DetailId")
                         .ValueGeneratedOnAdd()
@@ -141,7 +141,7 @@ namespace Test.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DetailId"), 1L, 1);
 
-                    b.Property<int>("BookBorrowingRequestRequestId")
+                    b.Property<int>("BookRequestRequestId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -155,9 +155,9 @@ namespace Test.Data.Migrations
 
                     b.HasKey("DetailId");
 
-                    b.HasIndex("BookBorrowingRequestRequestId");
+                    b.HasIndex("BookRequestRequestId");
 
-                    b.ToTable("BookBorrowingRequestDetails", (string)null);
+                    b.ToTable("BookRequestDetails", (string)null);
                 });
 
             modelBuilder.Entity("Test.Data.Entities.Category", b =>
@@ -258,11 +258,11 @@ namespace Test.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BookBookBorrowingRequest", b =>
+            modelBuilder.Entity("BookBookRequest", b =>
                 {
-                    b.HasOne("Test.Data.Entities.BookBorrowingRequest", null)
+                    b.HasOne("Test.Data.Entities.BookRequest", null)
                         .WithMany()
-                        .HasForeignKey("BookBorrowingRequestsRequestId")
+                        .HasForeignKey("BookRequestsRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -284,7 +284,7 @@ namespace Test.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Test.Data.Entities.BookBorrowingRequest", b =>
+            modelBuilder.Entity("Test.Data.Entities.BookRequest", b =>
                 {
                     b.HasOne("Test.Data.Entities.User", "ApprovedBy")
                         .WithMany()
@@ -295,7 +295,7 @@ namespace Test.Data.Migrations
                         .HasForeignKey("RejectedById");
 
                     b.HasOne("Test.Data.Entities.User", "RequestedByUser")
-                        .WithMany("RequestedBorrowingRequests")
+                        .WithMany("BookRequests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -307,20 +307,20 @@ namespace Test.Data.Migrations
                     b.Navigation("RequestedByUser");
                 });
 
-            modelBuilder.Entity("Test.Data.Entities.BookBorrowingRequestDetail", b =>
+            modelBuilder.Entity("Test.Data.Entities.BookRequestDetail", b =>
                 {
-                    b.HasOne("Test.Data.Entities.BookBorrowingRequest", "BookBorrowingRequest")
-                        .WithMany("BookBorrowingRequestDetails")
-                        .HasForeignKey("BookBorrowingRequestRequestId")
+                    b.HasOne("Test.Data.Entities.BookRequest", "BookRequest")
+                        .WithMany("BookRequestDetails")
+                        .HasForeignKey("BookRequestRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BookBorrowingRequest");
+                    b.Navigation("BookRequest");
                 });
 
-            modelBuilder.Entity("Test.Data.Entities.BookBorrowingRequest", b =>
+            modelBuilder.Entity("Test.Data.Entities.BookRequest", b =>
                 {
-                    b.Navigation("BookBorrowingRequestDetails");
+                    b.Navigation("BookRequestDetails");
                 });
 
             modelBuilder.Entity("Test.Data.Entities.Category", b =>
@@ -330,7 +330,7 @@ namespace Test.Data.Migrations
 
             modelBuilder.Entity("Test.Data.Entities.User", b =>
                 {
-                    b.Navigation("RequestedBorrowingRequests");
+                    b.Navigation("BookRequests");
                 });
 #pragma warning restore 612, 618
         }

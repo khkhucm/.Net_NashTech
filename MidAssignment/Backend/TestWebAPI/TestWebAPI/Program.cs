@@ -1,8 +1,10 @@
 
 
 using Microsoft.EntityFrameworkCore;
-
+using System.Text.Json.Serialization;
 using Test.Data;
+using Test.Data.Repositories.Implements;
+using Test.Data.Repositories.Interfaces;
 using TestWebAPI.Services.Implements;
 using TestWebAPI.Services.Interfaces;
 
@@ -17,7 +19,10 @@ builder.Services.AddDbContext<TestContext>(opt =>
     opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddTransient<ITestService, TestService>();
+builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,6 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

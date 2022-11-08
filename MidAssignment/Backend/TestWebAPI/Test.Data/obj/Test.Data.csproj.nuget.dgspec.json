@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Test.Data\\Test.Data.csproj": {}
+    "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Test.Data\\Test.Data.csproj": {}
   },
   "projects": {
-    "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj": {
+    "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj",
+        "projectUniqueName": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj",
+        "projectPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\obj\\",
+        "outputPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,14 +59,14 @@
         }
       }
     },
-    "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Test.Data\\Test.Data.csproj": {
+    "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Test.Data\\Test.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Test.Data\\Test.Data.csproj",
+        "projectUniqueName": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Test.Data\\Test.Data.csproj",
         "projectName": "Test.Data",
-        "projectPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Test.Data\\Test.Data.csproj",
+        "projectPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Test.Data\\Test.Data.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Test.Data\\obj\\",
+        "outputPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Test.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,8 +83,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj": {
-                "projectPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Common\\Common.csproj"
+              "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj": {
+                "projectPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Common\\Common.csproj"
               }
             }
           }

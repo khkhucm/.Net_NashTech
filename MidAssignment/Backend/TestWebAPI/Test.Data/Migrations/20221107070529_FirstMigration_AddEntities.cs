@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Test.Data.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class FirstMigration_AddEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,7 +61,7 @@ namespace Test.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookBorrowingRequests",
+                name: "BookRequests",
                 columns: table => new
                 {
                     RequestId = table.Column<int>(type: "int", nullable: false)
@@ -74,19 +74,19 @@ namespace Test.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookBorrowingRequests", x => x.RequestId);
+                    table.PrimaryKey("PK_BookRequests", x => x.RequestId);
                     table.ForeignKey(
-                        name: "FK_BookBorrowingRequests_Users_ApprovedById",
+                        name: "FK_BookRequests_Users_ApprovedById",
                         column: x => x.ApprovedById,
                         principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BookBorrowingRequests_Users_RejectedById",
+                        name: "FK_BookRequests_Users_RejectedById",
                         column: x => x.RejectedById,
                         principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BookBorrowingRequests_Users_UserId",
+                        name: "FK_BookRequests_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -94,23 +94,23 @@ namespace Test.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookBookBorrowingRequest",
+                name: "BookBookRequest",
                 columns: table => new
                 {
-                    BookBorrowingRequestsRequestId = table.Column<int>(type: "int", nullable: false),
+                    BookRequestsRequestId = table.Column<int>(type: "int", nullable: false),
                     BooksBookId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookBookBorrowingRequest", x => new { x.BookBorrowingRequestsRequestId, x.BooksBookId });
+                    table.PrimaryKey("PK_BookBookRequest", x => new { x.BookRequestsRequestId, x.BooksBookId });
                     table.ForeignKey(
-                        name: "FK_BookBookBorrowingRequest_BookBorrowingRequests_BookBorrowingRequestsRequestId",
-                        column: x => x.BookBorrowingRequestsRequestId,
-                        principalTable: "BookBorrowingRequests",
+                        name: "FK_BookBookRequest_BookRequests_BookRequestsRequestId",
+                        column: x => x.BookRequestsRequestId,
+                        principalTable: "BookRequests",
                         principalColumn: "RequestId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookBookBorrowingRequest_Books_BooksBookId",
+                        name: "FK_BookBookRequest_Books_BooksBookId",
                         column: x => x.BooksBookId,
                         principalTable: "Books",
                         principalColumn: "BookId",
@@ -118,7 +118,7 @@ namespace Test.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookBorrowingRequestDetails",
+                name: "BookRequestDetails",
                 columns: table => new
                 {
                     DetailId = table.Column<int>(type: "int", nullable: false)
@@ -126,15 +126,15 @@ namespace Test.Data.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RequestId = table.Column<int>(type: "int", nullable: false),
-                    BookBorrowingRequestRequestId = table.Column<int>(type: "int", nullable: false)
+                    BookRequestRequestId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookBorrowingRequestDetails", x => x.DetailId);
+                    table.PrimaryKey("PK_BookRequestDetails", x => x.DetailId);
                     table.ForeignKey(
-                        name: "FK_BookBorrowingRequestDetails_BookBorrowingRequests_BookBorrowingRequestRequestId",
-                        column: x => x.BookBorrowingRequestRequestId,
-                        principalTable: "BookBorrowingRequests",
+                        name: "FK_BookRequestDetails_BookRequests_BookRequestRequestId",
+                        column: x => x.BookRequestRequestId,
+                        principalTable: "BookRequests",
                         principalColumn: "RequestId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -174,28 +174,28 @@ namespace Test.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookBookBorrowingRequest_BooksBookId",
-                table: "BookBookBorrowingRequest",
+                name: "IX_BookBookRequest_BooksBookId",
+                table: "BookBookRequest",
                 column: "BooksBookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookBorrowingRequestDetails_BookBorrowingRequestRequestId",
-                table: "BookBorrowingRequestDetails",
-                column: "BookBorrowingRequestRequestId");
+                name: "IX_BookRequestDetails_BookRequestRequestId",
+                table: "BookRequestDetails",
+                column: "BookRequestRequestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookBorrowingRequests_ApprovedById",
-                table: "BookBorrowingRequests",
+                name: "IX_BookRequests_ApprovedById",
+                table: "BookRequests",
                 column: "ApprovedById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookBorrowingRequests_RejectedById",
-                table: "BookBorrowingRequests",
+                name: "IX_BookRequests_RejectedById",
+                table: "BookRequests",
                 column: "RejectedById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookBorrowingRequests_UserId",
-                table: "BookBorrowingRequests",
+                name: "IX_BookRequests_UserId",
+                table: "BookRequests",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -207,16 +207,16 @@ namespace Test.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BookBookBorrowingRequest");
+                name: "BookBookRequest");
 
             migrationBuilder.DropTable(
-                name: "BookBorrowingRequestDetails");
+                name: "BookRequestDetails");
 
             migrationBuilder.DropTable(
                 name: "Books");
 
             migrationBuilder.DropTable(
-                name: "BookBorrowingRequests");
+                name: "BookRequests");
 
             migrationBuilder.DropTable(
                 name: "Categories");

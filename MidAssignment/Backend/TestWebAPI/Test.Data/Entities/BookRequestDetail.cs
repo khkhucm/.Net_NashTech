@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Test.Data.Entities
 {
-    public class BookBorrowingRequestDetail
+    public class BookRequestDetail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -11,6 +11,6 @@ namespace Test.Data.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int RequestId { get; set; }
-        public BookBorrowingRequest BookBorrowingRequest { get; set; }
+        public BookRequest BookRequest { get; set; }
     }
 }

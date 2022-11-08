@@ -2103,11 +2103,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\TestWebAPI\\TestWebAPI.csproj",
+      "projectUniqueName": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\TestWebAPI\\TestWebAPI.csproj",
       "projectName": "TestWebAPI",
-      "projectPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\TestWebAPI\\TestWebAPI.csproj",
+      "projectPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\TestWebAPI\\TestWebAPI.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\TestWebAPI\\obj\\",
+      "outputPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\TestWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2124,8 +2124,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Test.Data\\Test.Data.csproj": {
-              "projectPath": "D:\\RookiesB6\\MidAssignment\\TestWebAPI\\Test.Data\\Test.Data.csproj"
+            "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Test.Data\\Test.Data.csproj": {
+              "projectPath": "D:\\RookiesB6\\MidAssignment\\Backend\\TestWebAPI\\Test.Data\\Test.Data.csproj"
             }
           }
         }

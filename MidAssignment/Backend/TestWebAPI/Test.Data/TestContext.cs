@@ -28,11 +28,11 @@ namespace Test.Data
             builder.Entity<Category>()
                 .ToTable("Categories");
 
-            builder.Entity<BookBorrowingRequest>()
-                .ToTable("BookBorrowingRequests");
+            builder.Entity<BookRequest>()
+                .ToTable("BookRequests");
 
-            builder.Entity<BookBorrowingRequestDetail>()
-                .ToTable("BookBorrowingRequestDetails");
+            builder.Entity<BookRequestDetail>()
+                .ToTable("BookRequestDetails");
 
             builder.Entity<User>()
                 .ToTable("Users");
@@ -45,15 +45,15 @@ namespace Test.Data
                 .WithMany(c => c.Books)
                 .HasForeignKey(b => b.CategoryId);
             builder.Entity<Book>()
-                .HasMany(b => b.BookBorrowingRequests)
+                .HasMany(b => b.BookRequests)
                 .WithMany(br => br.Books);
 
-            builder.Entity<BookBorrowingRequest>()
-                .HasMany(br => br.BookBorrowingRequestDetails)
-                .WithOne(bd => bd.BookBorrowingRequest);
+            builder.Entity<BookRequest>()
+                .HasMany(br => br.BookRequestDetails)
+                .WithOne(bd => bd.BookRequest);
 
             builder.Entity<User>()
-                .HasMany(u => u.RequestedBorrowingRequests)
+                .HasMany(u => u.BookRequests)
                 .WithOne(br => br.RequestedByUser)
                 .HasForeignKey(br => br.UserId);
         }
@@ -85,8 +85,8 @@ namespace Test.Data
 
         public DbSet<Book> Books { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
-        public DbSet<BookBorrowingRequest> BookBorrowingRequests { get; set; } = null!;
-        public DbSet<BookBorrowingRequestDetail> BookBorrowingRequestDetails { get; set; } = null!;
+        public DbSet<BookRequest> BookRequests { get; set; } = null!;
+        public DbSet<BookRequestDetail> BookRequestDetails { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
     }
 }
