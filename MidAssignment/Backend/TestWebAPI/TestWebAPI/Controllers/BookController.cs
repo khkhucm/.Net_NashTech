@@ -84,9 +84,28 @@ namespace TestWebAPI.Controllers
         public ActionResult Delete(int id)
         {
             var message = "Delete succeeded";
+
             try
             {
                 var isSucceeded = _bookService.Delete(id);
+
+                return isSucceeded ? Ok(message) : NotFound();
+            }
+            catch
+            {
+                return BadRequest("Bad request");
+            }
+        }
+
+
+        [HttpPut("softdelete/{id}")]
+        public ActionResult SoftDelete(int id)
+        {
+            var message = "Delete succeeded";
+
+            try
+            {
+                var isSucceeded = _bookService.SoftDelete(id);
 
                 return isSucceeded ? Ok(message) : NotFound();
             }

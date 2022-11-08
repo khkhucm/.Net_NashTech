@@ -12,8 +12,8 @@ using Test.Data;
 namespace Test.Data.Migrations
 {
     [DbContext(typeof(TestContext))]
-    [Migration("20221107070529_FirstMigration_AddEntities")]
-    partial class FirstMigration_AddEntities
+    [Migration("20221108135924_SecondMigration_AddIsDeletedToCategory")]
+    partial class SecondMigration_AddIsDeletedToCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,9 @@ namespace Test.Data.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("BookId");
 
                     b.HasIndex("CategoryId");
@@ -65,37 +68,43 @@ namespace Test.Data.Migrations
                         {
                             BookId = 1,
                             BookName = "Book 1",
-                            CategoryId = 1
+                            CategoryId = 1,
+                            IsDeleted = false
                         },
                         new
                         {
                             BookId = 2,
                             BookName = "Book 2",
-                            CategoryId = 2
+                            CategoryId = 2,
+                            IsDeleted = false
                         },
                         new
                         {
                             BookId = 3,
                             BookName = "Book 3",
-                            CategoryId = 1
+                            CategoryId = 1,
+                            IsDeleted = false
                         },
                         new
                         {
                             BookId = 4,
                             BookName = "Book 4",
-                            CategoryId = 3
+                            CategoryId = 3,
+                            IsDeleted = false
                         },
                         new
                         {
                             BookId = 5,
                             BookName = "Book 5",
-                            CategoryId = 1
+                            CategoryId = 1,
+                            IsDeleted = false
                         },
                         new
                         {
                             BookId = 6,
                             BookName = "Book 6",
-                            CategoryId = 3
+                            CategoryId = 3,
+                            IsDeleted = false
                         });
                 });
 
@@ -171,6 +180,9 @@ namespace Test.Data.Migrations
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories", (string)null);
@@ -179,17 +191,20 @@ namespace Test.Data.Migrations
                         new
                         {
                             CategoryId = 1,
-                            CategoryName = "Culture"
+                            CategoryName = "Culture",
+                            IsDeleted = false
                         },
                         new
                         {
                             CategoryId = 2,
-                            CategoryName = "Science"
+                            CategoryName = "Science",
+                            IsDeleted = false
                         },
                         new
                         {
                             CategoryId = 3,
-                            CategoryName = "Travel"
+                            CategoryName = "Travel",
+                            IsDeleted = false
                         });
                 });
 

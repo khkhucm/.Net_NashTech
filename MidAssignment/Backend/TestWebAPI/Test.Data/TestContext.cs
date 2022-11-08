@@ -61,18 +61,18 @@ namespace Test.Data
         private void SeedData(ModelBuilder builder)
         {
             builder.Entity<Category>().HasData(
-                new Category { CategoryId = 1, CategoryName = "Culture" },
-                new Category { CategoryId = 2, CategoryName = "Science" },
-                new Category { CategoryId = 3, CategoryName = "Travel" }
+                new Category { CategoryId = 1, CategoryName = "Culture", IsDeleted = false },
+                new Category { CategoryId = 2, CategoryName = "Science", IsDeleted = false },
+                new Category { CategoryId = 3, CategoryName = "Travel", IsDeleted = false }
             );
 
             builder.Entity<Book>().HasData(
-                new Book { BookId = 1, BookName = "Book 1", CategoryId = 1 },
-                new Book { BookId = 2, BookName = "Book 2", CategoryId = 2 },
-                new Book { BookId = 3, BookName = "Book 3" , CategoryId = 1 },
-                new Book { BookId = 4, BookName = "Book 4" , CategoryId = 3 },
-                new Book { BookId = 5, BookName = "Book 5"  ,CategoryId = 1 },
-                new Book { BookId = 6, BookName = "Book 6" , CategoryId = 3 }
+                new Book { BookId = 1, BookName = "Book 1", CategoryId = 1, IsDeleted = false },
+                new Book { BookId = 2, BookName = "Book 2", CategoryId = 2, IsDeleted = false },
+                new Book { BookId = 3, BookName = "Book 3" , CategoryId = 1, IsDeleted = false },
+                new Book { BookId = 4, BookName = "Book 4" , CategoryId = 3 , IsDeleted = false },
+                new Book { BookId = 5, BookName = "Book 5"  ,CategoryId = 1 , IsDeleted = false },
+                new Book { BookId = 6, BookName = "Book 6" , CategoryId = 3 , IsDeleted = false }
             );
 
             builder.Entity<User>().HasData(

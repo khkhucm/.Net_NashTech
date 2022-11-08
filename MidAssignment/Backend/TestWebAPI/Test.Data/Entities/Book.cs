@@ -10,6 +10,7 @@ namespace Test.Data.Entities
         public int BookId { get; set; }
         public string BookName { get; set; }
         public int CategoryId { get; set; }
+        public bool IsDeleted { get; set; }
         public Category? Category { get; set; }
         public ICollection<BookRequest>? BookRequests { get; set; }
     }

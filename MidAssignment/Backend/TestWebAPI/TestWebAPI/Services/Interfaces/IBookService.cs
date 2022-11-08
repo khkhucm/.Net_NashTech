@@ -10,5 +10,6 @@ namespace TestWebAPI.Services.Interfaces
         GetBookModel? GetById(int id);
         UpdateBookResponse? Update(int id, UpdateBookRequest updateModel);
         bool Delete(int id);
+        bool SoftDelete(int id);
     }
 }

@@ -30,6 +30,7 @@ namespace TestWebAPI.Services.Implements
                     var newBook = new Book
                     {
                         BookName = addModel.Name,
+                        IsDeleted = false,
                         CategoryId = addModel.CategoryId,
                         Category = category
                     };
@@ -87,9 +88,38 @@ namespace TestWebAPI.Services.Implements
             }
         }
 
+        public bool SoftDelete(int id)
+        {
+            using var transaction = _bookRepository.DatabaseTransaction();
+
+            try
+            {
+                var book = _bookRepository.Get(book => book.BookId == id);
+
+                if (book != null)
+                {
+                    //_bookRepository.Delete(book);
+                    book.IsDeleted = true;
+                    _bookRepository.Update(book);
+                    _bookRepository.SaveChanges();
+                    transaction.Commit();
+
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+                transaction.RollBack();
+
+                return false;
+            }
+        }
+
         public IEnumerable<GetBookModel> GetAll()
         {
-            var listBooks = _bookRepository.GetAll();
+            var listBooks = _bookRepository.GetAll(b => b.IsDeleted == false);
 
             return listBooks.Select(entity => new GetBookModel
             {
@@ -105,7 +135,7 @@ namespace TestWebAPI.Services.Implements
 
         public GetBookModel? GetById(int id)
         {
-            var book = _bookRepository.Get(b => b.BookId == id);
+            var book = _bookRepository.Get(b => b.BookId == id && b.IsDeleted == false);
 
             if (book == null)
             {
@@ -130,7 +160,7 @@ namespace TestWebAPI.Services.Implements
 
             try
             {
-                var book = _bookRepository.Get(b => b.BookId == id);
+                var book = _bookRepository.Get(b => b.BookId == id && b.IsDeleted == false);
 
                 if (book != null)
                 {

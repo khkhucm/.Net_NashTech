@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Test.Data.Migrations
 {
-    public partial class FirstMigration_AddEntities : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,8 @@ namespace Test.Data.Migrations
                     BookId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -162,15 +163,15 @@ namespace Test.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "BookId", "BookName", "CategoryId" },
+                columns: new[] { "BookId", "BookName", "CategoryId", "IsDeleted" },
                 values: new object[,]
                 {
-                    { 1, "Book 1", 1 },
-                    { 2, "Book 2", 2 },
-                    { 3, "Book 3", 1 },
-                    { 4, "Book 4", 3 },
-                    { 5, "Book 5", 1 },
-                    { 6, "Book 6", 3 }
+                    { 1, "Book 1", 1, false },
+                    { 2, "Book 2", 2, false },
+                    { 3, "Book 3", 1, false },
+                    { 4, "Book 4", 3, false },
+                    { 5, "Book 5", 1, false },
+                    { 6, "Book 6", 3, false }
                 });
 
             migrationBuilder.CreateIndex(

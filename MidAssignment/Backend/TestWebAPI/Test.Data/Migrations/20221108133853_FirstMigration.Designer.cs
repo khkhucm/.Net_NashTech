@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Test.Data;
 
@@ -11,9 +12,10 @@ using Test.Data;
 namespace Test.Data.Migrations
 {
     [DbContext(typeof(TestContext))]
-    partial class TestContextModelSnapshot : ModelSnapshot
+    [Migration("20221108133853_FirstMigration")]
+    partial class FirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,9 +180,6 @@ namespace Test.Data.Migrations
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories", (string)null);
@@ -189,20 +188,17 @@ namespace Test.Data.Migrations
                         new
                         {
                             CategoryId = 1,
-                            CategoryName = "Culture",
-                            IsDeleted = false
+                            CategoryName = "Culture"
                         },
                         new
                         {
                             CategoryId = 2,
-                            CategoryName = "Science",
-                            IsDeleted = false
+                            CategoryName = "Science"
                         },
                         new
                         {
                             CategoryId = 3,
-                            CategoryName = "Travel",
-                            IsDeleted = false
+                            CategoryName = "Travel"
                         });
                 });
 

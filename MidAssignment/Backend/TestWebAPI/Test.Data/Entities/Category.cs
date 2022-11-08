@@ -9,6 +9,7 @@ namespace Test.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CategoryId { get; set; }
         public string? CategoryName { get; set; }
+        public bool IsDeleted { get; set; }
         public ICollection<Book>? Books { get; set; }
     }
 }
