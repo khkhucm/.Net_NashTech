@@ -49,7 +49,6 @@ namespace TestWebAPI.Controllers
             }
         }
 
-
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {

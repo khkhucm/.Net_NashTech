@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Test.Data;
 
@@ -11,9 +12,10 @@ using Test.Data;
 namespace Test.Data.Migrations
 {
     [DbContext(typeof(TestContext))]
-    partial class TestContextModelSnapshot : ModelSnapshot
+    [Migration("20221109092738_Migration_ChangeToNotNullableCategoryName")]
+    partial class Migration_ChangeToNotNullableCategoryName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,21 @@ namespace Test.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BookBookRequest", b =>
+                {
+                    b.Property<int>("BookRequestsRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BooksBookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookRequestsRequestId", "BooksBookId");
+
+                    b.HasIndex("BooksBookId");
+
+                    b.ToTable("BookBookRequest");
+                });
 
             modelBuilder.Entity("Test.Data.Entities.Book", b =>
                 {
@@ -99,10 +116,10 @@ namespace Test.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RequestId"), 1L, 1);
 
-                    b.Property<int?>("ApprovalModifiedById")
+                    b.Property<int?>("ApprovedById")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookId")
+                    b.Property<int?>("RejectedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("RequestedDate")
@@ -116,9 +133,9 @@ namespace Test.Data.Migrations
 
                     b.HasKey("RequestId");
 
-                    b.HasIndex("ApprovalModifiedById");
+                    b.HasIndex("ApprovedById");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("RejectedById");
 
                     b.HasIndex("UserId");
 
@@ -133,9 +150,6 @@ namespace Test.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DetailId"), 1L, 1);
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<int>("BookRequestRequestId")
                         .HasColumnType("int");
 
@@ -148,12 +162,7 @@ namespace Test.Data.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("DetailId");
-
-                    b.HasIndex("BookId");
 
                     b.HasIndex("BookRequestRequestId");
 
@@ -265,6 +274,21 @@ namespace Test.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BookBookRequest", b =>
+                {
+                    b.HasOne("Test.Data.Entities.BookRequest", null)
+                        .WithMany()
+                        .HasForeignKey("BookRequestsRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Test.Data.Entities.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksBookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Test.Data.Entities.Book", b =>
                 {
                     b.HasOne("Test.Data.Entities.Category", "Category")
@@ -278,13 +302,13 @@ namespace Test.Data.Migrations
 
             modelBuilder.Entity("Test.Data.Entities.BookRequest", b =>
                 {
-                    b.HasOne("Test.Data.Entities.User", "ApprovalModifiedBy")
+                    b.HasOne("Test.Data.Entities.User", "ApprovedBy")
                         .WithMany()
-                        .HasForeignKey("ApprovalModifiedById");
+                        .HasForeignKey("ApprovedById");
 
-                    b.HasOne("Test.Data.Entities.Book", null)
-                        .WithMany("BookRequests")
-                        .HasForeignKey("BookId");
+                    b.HasOne("Test.Data.Entities.User", "RejectedBy")
+                        .WithMany()
+                        .HasForeignKey("RejectedById");
 
                     b.HasOne("Test.Data.Entities.User", "RequestedByUser")
                         .WithMany("BookRequests")
@@ -292,33 +316,22 @@ namespace Test.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApprovalModifiedBy");
+                    b.Navigation("ApprovedBy");
+
+                    b.Navigation("RejectedBy");
 
                     b.Navigation("RequestedByUser");
                 });
 
             modelBuilder.Entity("Test.Data.Entities.BookRequestDetail", b =>
                 {
-                    b.HasOne("Test.Data.Entities.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Test.Data.Entities.BookRequest", "BookRequest")
                         .WithMany("BookRequestDetails")
                         .HasForeignKey("BookRequestRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Book");
-
                     b.Navigation("BookRequest");
-                });
-
-            modelBuilder.Entity("Test.Data.Entities.Book", b =>
-                {
-                    b.Navigation("BookRequests");
                 });
 
             modelBuilder.Entity("Test.Data.Entities.BookRequest", b =>

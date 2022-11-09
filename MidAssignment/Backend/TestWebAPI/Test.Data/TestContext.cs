@@ -45,12 +45,14 @@ namespace Test.Data
                 .WithMany(c => c.Books)
                 .HasForeignKey(b => b.CategoryId);
             builder.Entity<Book>()
-                .HasMany(b => b.BookRequests)
-                .WithMany(br => br.Books);
+                .HasMany(b => b.BookRequests);
 
             builder.Entity<BookRequest>()
                 .HasMany(br => br.BookRequestDetails)
                 .WithOne(bd => bd.BookRequest);
+
+            builder.Entity<BookRequestDetail>()
+                .HasOne(bd => bd.Book);
 
             builder.Entity<User>()
                 .HasMany(u => u.BookRequests)

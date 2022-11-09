@@ -13,9 +13,10 @@ namespace Test.Data.Entities
         public User RequestedByUser { get; set; }
         public DateTime? RequestedDate { get; set; }
         public RequestBookStatus Status { get; set; }
-        public User? RejectedBy { get; set; }
-        public User? ApprovedBy { get; set; }
+        public User? ApprovalModifiedBy { get; set; }
+
+        //public User? ApprovedBy { get; set; }
         public ICollection<BookRequestDetail>? BookRequestDetails { get; set; }
-        public ICollection<Book>? Books { get; set; }
+       // public ICollection<Book>? Books { get; set; }
     }
 }

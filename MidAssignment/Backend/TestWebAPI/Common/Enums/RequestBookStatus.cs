@@ -2,8 +2,9 @@
 {
     public enum RequestBookStatus
     {
-        Approve,
-        Reject,
-        Waiting
+        Approved,
+        Rejected,
+        Waiting,
+        Completed
     }
 }

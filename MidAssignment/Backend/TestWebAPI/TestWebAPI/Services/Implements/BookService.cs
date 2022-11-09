@@ -41,19 +41,26 @@ namespace TestWebAPI.Services.Implements
                     _bookRepository.SaveChanges();
                     transaction.Commit();
 
+                    var categoryModel = new CategoryModel
+                    {
+                        Id = category.CategoryId,
+                        Name = category.CategoryName
+                    };
+
+                    if (newBook.Category.IsDeleted == true)
+                    {
+                        categoryModel = null;
+                    }
+
                     return new CreateBookResponse
                     {
                         Id = newBook.BookId,
                         Name = newBook.BookName,
-                        Category = new CategoryModel
-                        {
-                            Id = category.CategoryId,
-                            Name = category.CategoryName
-                        }
+                        Category = categoryModel
                     };
                 }
-
                 return null;
+
             }
             catch
             {
@@ -122,14 +129,29 @@ namespace TestWebAPI.Services.Implements
         {
             var listBooks = _bookRepository.GetAll(b => b.IsDeleted == false);
 
-            return listBooks.Select(entity => new GetBookModel
+            return listBooks.Select((entity) =>
             {
-                Id = entity.BookId,
-                Name = entity.BookName,
-                Category = new CategoryModel
+                if (entity.Category?.IsDeleted == false)
                 {
-                    Id = entity.Category.CategoryId,
-                    Name = entity.Category.CategoryName
+                    return new GetBookModel
+                    {
+                        Id = entity.BookId,
+                        Name = entity.BookName,
+                        Category = new CategoryModel
+                        {
+                            Id = entity.Category.CategoryId,
+                            Name = entity.Category.CategoryName
+                        }
+                    };
+                }
+                else
+                {
+                    return new GetBookModel
+                    {
+                        Id = entity.BookId,
+                        Name = entity.BookName,
+                        Category = null
+                    };
                 }
             });
         }
@@ -143,15 +165,22 @@ namespace TestWebAPI.Services.Implements
                 return null;
             }
 
+            var category = new CategoryModel
+            {
+                Id = book.Category.CategoryId,
+                Name = book.Category.CategoryName
+            };
+
+            if (book.Category.IsDeleted == true)
+            {
+                category = null;
+            }
+
             return new GetBookModel
             {
                 Id = book.BookId,
                 Name = book.BookName,
-                Category = new CategoryModel
-                {
-                    Id = book.Category.CategoryId,
-                    Name = book.Category.CategoryName
-                }
+                Category = category,
             };
         }
 
@@ -181,15 +210,22 @@ namespace TestWebAPI.Services.Implements
                         _bookRepository.SaveChanges();
                         transaction.Commit();
 
+                        var categoryModel = new CategoryModel
+                        {
+                            Id = category.CategoryId,
+                            Name = category.CategoryName
+                        };
+
+                        if (book.Category.IsDeleted == true)
+                        {
+                            categoryModel = null;
+                        }
+
                         return new UpdateBookResponse
                         {
                             Id = book.BookId,
                             Name = book.BookName,
-                            Category = new CategoryModel
-                            {
-                                Id = book.Category.CategoryId,
-                                Name = book.Category.CategoryName
-                            }
+                            Category = categoryModel
                         };
                     }
                 }
@@ -222,7 +258,7 @@ namespace TestWebAPI.Services.Implements
 
             queryModel.SortOption ??= SortEnum.NameAcsending;
 
-            switch(queryModel.SortOption.Value)
+            switch (queryModel.SortOption.Value)
             {
                 case SortEnum.NameAcsending:
                     books = books?.OrderBy(b => b.BookName)?.ToList();
@@ -231,14 +267,14 @@ namespace TestWebAPI.Services.Implements
                     books = books?.OrderByDescending(b => b.BookName)?.ToList();
                     break;
                 case SortEnum.CategoryNameAscending:
-                    books = books?.OrderBy(c => c.Category.CategoryName)?.ToList();
+                    books = books?.OrderBy(c => c.Category?.CategoryName)?.ToList();
                     break;
                 case SortEnum.CategoryNameDescending:
-                    books = books?.OrderByDescending(c => c.Category.CategoryName)?.ToList();
+                    books = books?.OrderByDescending(c => c.Category?.CategoryName)?.ToList();
                     break;
                 default:
                     break;
-            }    
+            }
 
             if (books == null || books.Count() == 0)
             {
@@ -268,8 +304,8 @@ namespace TestWebAPI.Services.Implements
             });
 
             output.Source = listBooks.Skip((queryModel.Page - 1) * queryModel.PageSize)
-                    .Take(queryModel.PageSize)
-                    .ToList();
+                                    .Take(queryModel.PageSize)
+                                    .ToList();
 
             output.TotalPage = (output.TotalRecord - 1) / queryModel.PageSize + 1;
 
