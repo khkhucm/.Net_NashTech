@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common.Enums;
+using Microsoft.AspNetCore.Mvc;
 using TestWebAPI.DTOs.Book;
+using TestWebAPI.DTOs.Pagination;
 using TestWebAPI.Services.Interfaces;
 
 namespace TestWebAPI.Controllers
@@ -113,6 +115,23 @@ namespace TestWebAPI.Controllers
             {
                 return BadRequest("Bad request");
             }
+        }
+
+        [HttpGet("query")]
+        public ActionResult GetBookQuery(int page, int pageSize, string? name, int? categoryId, SortEnum? sort)
+        {
+            var queryModel = new PaginationQueryModel
+            {
+                Page = page,
+                PageSize = pageSize,
+                Name = name,
+                CategoryId = categoryId,
+                SortOption = sort
+            };
+
+            var result = _bookService.GetPagination(queryModel);
+
+            return Ok(result);
         }
     }
 }

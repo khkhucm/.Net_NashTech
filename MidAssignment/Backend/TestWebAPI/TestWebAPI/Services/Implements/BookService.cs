@@ -1,7 +1,9 @@
-﻿using Test.Data.Entities;
+﻿using Common.Enums;
+using Test.Data.Entities;
 using Test.Data.Repositories.Interfaces;
 using TestWebAPI.DTOs.Book;
 using TestWebAPI.DTOs.Category;
+using TestWebAPI.DTOs.Pagination;
 using TestWebAPI.Services.Interfaces;
 
 namespace TestWebAPI.Services.Implements
@@ -98,7 +100,6 @@ namespace TestWebAPI.Services.Implements
 
                 if (book != null)
                 {
-                    //_bookRepository.Delete(book);
                     book.IsDeleted = true;
                     _bookRepository.Update(book);
                     _bookRepository.SaveChanges();
@@ -201,6 +202,85 @@ namespace TestWebAPI.Services.Implements
 
                 return null;
             }
+        }
+
+        public Pagination<GetBookModel> GetPagination(PaginationQueryModel queryModel)
+        {
+            var books = _bookRepository.GetAll(b => b.IsDeleted == false);
+
+            if (!string.IsNullOrEmpty(queryModel.Name))
+            {
+                var nameToQuery = queryModel.Name.Trim().ToLower();
+                books = books?.Where(b => b.BookName.ToLower().Contains(nameToQuery)).ToList();
+            }
+
+            if (queryModel.CategoryId.HasValue)
+            {
+                var categoryId = queryModel.CategoryId.Value;
+                books = books?.Where(x => x.CategoryId == queryModel.CategoryId).ToList();
+            }
+
+            queryModel.SortOption ??= SortEnum.NameAcsending;
+
+            switch(queryModel.SortOption.Value)
+            {
+                case SortEnum.NameAcsending:
+                    books = books?.OrderBy(b => b.BookName)?.ToList();
+                    break;
+                case SortEnum.NameDescending:
+                    books = books?.OrderByDescending(b => b.BookName)?.ToList();
+                    break;
+                case SortEnum.CategoryNameAscending:
+                    books = books?.OrderBy(c => c.Category.CategoryName)?.ToList();
+                    break;
+                case SortEnum.CategoryNameDescending:
+                    books = books?.OrderByDescending(c => c.Category.CategoryName)?.ToList();
+                    break;
+                default:
+                    break;
+            }    
+
+            if (books == null || books.Count() == 0)
+            {
+                queryModel.Page = 1;
+                return new Pagination<GetBookModel>
+                {
+                    Source = null,
+                    TotalPage = 1,
+                    TotalRecord = 0,
+                    QueryModel = queryModel
+                };
+            }
+
+            var output = new Pagination<GetBookModel>();
+
+            output.TotalRecord = books.Count();
+
+            var listBooks = books.Select(entity => new GetBookModel
+            {
+                Id = entity.BookId,
+                Name = entity.BookName,
+                Category = new CategoryModel
+                {
+                    Id = entity.Category.CategoryId,
+                    Name = entity.Category.CategoryName
+                }
+            });
+
+            output.Source = listBooks.Skip((queryModel.Page - 1) * queryModel.PageSize)
+                    .Take(queryModel.PageSize)
+                    .ToList();
+
+            output.TotalPage = (output.TotalRecord - 1) / queryModel.PageSize + 1;
+
+            if (queryModel.Page > output.TotalPage)
+            {
+                queryModel.Page = output.TotalPage;
+            }
+
+            output.QueryModel = queryModel;
+
+            return output;
         }
     }
 }

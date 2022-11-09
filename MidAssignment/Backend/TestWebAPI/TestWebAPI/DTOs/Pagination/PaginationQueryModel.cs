@@ -1,22 +1,17 @@
 ﻿using Common;
+using Common.Enums;
 
-namespace TestWebAPI.Helpers
+namespace TestWebAPI.DTOs.Pagination
 {
-    public class PagingFilter
+    public class PaginationQueryModel
     {
         private int _page;
         private int _pageSize;
 
-        public PagingFilter()
-        {
-            Page = Constants.DefaultPage;
-            PageSize = Constants.DefaultPageSize;
-        }
-
         public int Page
         {
             get => _page;
-            set => _page = value > 0 ? value : 1;
+            set => _page = value > 0 ? value : Constants.DefaultPage;
         }
 
         public int PageSize
@@ -24,5 +19,10 @@ namespace TestWebAPI.Helpers
             get => _pageSize;
             set => _pageSize = value >= 10 ? value : Constants.DefaultPageSize;
         }
+
+        public string? Name { get; set; }
+        public int? CategoryId { get; set; }
+        public SortEnum? SortOption { get; set; }
+
     }
 }
