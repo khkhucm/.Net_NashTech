@@ -96,5 +96,22 @@ namespace TestWebAPI.Controllers
                 return BadRequest("Bad request");
             }
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] UpdateCategoryRequest categoryUpdateMode)
+        {
+            if (categoryUpdateMode == null) return BadRequest();
+
+            try
+            {
+                var data = _categoryService.Update(id, categoryUpdateMode);
+
+                return data != null ? Ok(data) : NotFound();
+            }
+            catch
+            {
+                return BadRequest("Bad request");
+            }
+        }
     }
 }

@@ -152,5 +152,38 @@ namespace TestWebAPI.Services.Implements
                 return false;
             }
         }
+
+        public UpdateCategoryResponse? Update(int id, UpdateCategoryRequest updateModel)
+        {
+            using var transaction = _categoryRepository.DatabaseTransaction();
+            try
+            {
+                var category = _categoryRepository.Get(c => c.CategoryId == id);
+
+                if (category != null)
+                {
+                    category.CategoryName = updateModel.Name;
+
+                    _categoryRepository.Update(category);
+                    _categoryRepository.SaveChanges();
+                    transaction.Commit();
+
+                    return new UpdateCategoryResponse
+                    {
+                        Id = category.CategoryId,
+                        Name = category.CategoryName
+                    };
+                }
+
+                return null;
+            }
+            catch
+            {
+                transaction.RollBack();
+
+                return null;
+            }
+
+        }
     }
 }

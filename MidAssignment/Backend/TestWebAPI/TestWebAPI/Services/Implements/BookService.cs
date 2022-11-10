@@ -196,7 +196,7 @@ namespace TestWebAPI.Services.Implements
                 {
                     var category = _categoryRepository.Get(cat => cat.CategoryId == updateModel.Category.Id);
 
-                    if (category != null)
+                    if (category != null && category.IsDeleted == false)
                     {
                         book.BookName = updateModel.Name;
                         book.CategoryId = updateModel.Category.Id;
@@ -216,17 +216,37 @@ namespace TestWebAPI.Services.Implements
                             Name = category.CategoryName
                         };
 
-                        if (book.Category.IsDeleted == true)
-                        {
-                            categoryModel = null;
-                        }
-
                         return new UpdateBookResponse
                         {
                             Id = book.BookId,
                             Name = book.BookName,
                             Category = categoryModel
                         };
+                    }
+                    else if (category != null && category.IsDeleted == true)
+                    {
+                        book.BookName = updateModel.Name;
+                        book.CategoryId = updateModel.Category.Id;
+                        book.Category = new Category
+                        {
+                            CategoryId = updateModel.Category.Id,
+                            CategoryName = updateModel.Category.Name
+                        };
+
+                        _bookRepository.Update(book);
+                        _bookRepository.SaveChanges();
+                        transaction.Commit();
+
+                        return new UpdateBookResponse
+                        {
+                            Id = book.BookId,
+                            Name = book.BookName,
+                            Category = null,
+                        };
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
 
@@ -292,14 +312,29 @@ namespace TestWebAPI.Services.Implements
 
             output.TotalRecord = books.Count();
 
-            var listBooks = books.Select(entity => new GetBookModel
+            var listBooks = books.Select((entity) =>
             {
-                Id = entity.BookId,
-                Name = entity.BookName,
-                Category = new CategoryModel
+                if (entity.Category?.IsDeleted == false)
                 {
-                    Id = entity.Category.CategoryId,
-                    Name = entity.Category.CategoryName
+                    return new GetBookModel
+                    {
+                        Id = entity.BookId,
+                        Name = entity.BookName,
+                        Category = new CategoryModel
+                        {
+                            Id = entity.Category.CategoryId,
+                            Name = entity.Category.CategoryName
+                        }
+                    };
+                }
+                else
+                {
+                    return new GetBookModel
+                    {
+                        Id = entity.BookId,
+                        Name = entity.BookName,
+                        Category = null,
+                    };
                 }
             });
 
