@@ -10,7 +10,7 @@ namespace Test.Data.Repositories.Implements
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
-        public CategoryRepository(TestContext context) : base(context)
+        public CategoryRepository(BookLibraryContext context) : base(context)
         {
         }
     }

@@ -11,7 +11,7 @@ using Test.Data;
 
 namespace Test.Data.Migrations
 {
-    [DbContext(typeof(TestContext))]
+    [DbContext(typeof(BookLibraryContext))]
     [Migration("20221108133853_FirstMigration")]
     partial class FirstMigration
     {

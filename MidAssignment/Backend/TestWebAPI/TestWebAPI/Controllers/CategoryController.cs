@@ -98,13 +98,13 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] UpdateCategoryRequest categoryUpdateMode)
+        public IActionResult Update(int id, [FromBody] UpdateCategoryRequest categoryUpdateModel)
         {
-            if (categoryUpdateMode == null) return BadRequest();
+            if (categoryUpdateModel == null) return BadRequest();
 
             try
             {
-                var data = _categoryService.Update(id, categoryUpdateMode);
+                var data = _categoryService.Update(id, categoryUpdateModel);
 
                 return data != null ? Ok(data) : NotFound();
             }

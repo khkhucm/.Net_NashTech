@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TestWebAPI.DTOs.Book;
 using TestWebAPI.DTOs.Pagination;
@@ -6,6 +7,7 @@ using TestWebAPI.Services.Interfaces;
 
 namespace TestWebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BookController : ControllerBase
@@ -35,6 +37,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult GetAll()
         {
             try
@@ -65,13 +68,13 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] UpdateBookRequest bookUpdateMode)
+        public IActionResult Update(int id, [FromBody] UpdateBookRequest bookUpdateModel)
         {
-            if (bookUpdateMode == null) return BadRequest();
+            if (bookUpdateModel == null) return BadRequest();
 
             try
             {
-                var data = _bookService.Update(id, bookUpdateMode);
+                var data = _bookService.Update(id, bookUpdateModel);
 
                 return data != null ? Ok(data) : NotFound();
             }

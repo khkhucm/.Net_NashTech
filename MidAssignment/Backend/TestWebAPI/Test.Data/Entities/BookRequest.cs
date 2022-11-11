@@ -10,13 +10,11 @@ namespace Test.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RequestId { get; set; }
         public int UserId { get; set; }
-        public User RequestedByUser { get; set; }
+        public User? RequestedByUser { get; set; }
         public DateTime? RequestedDate { get; set; }
         public RequestBookStatus Status { get; set; }
-        public User? ApprovalModifiedBy { get; set; }
-
-        //public User? ApprovedBy { get; set; }
+        public int? ApprovalById { get; set; }
+        public User? ApprovalModifiedByUser { get; set; }
         public ICollection<BookRequestDetail>? BookRequestDetails { get; set; }
-       // public ICollection<Book>? Books { get; set; }
     }
 }

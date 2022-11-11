@@ -7,7 +7,7 @@ namespace Test.Data.Repositories.Implements
 {
     public class BookRepository : BaseRepository<Book>, IBookRepository
     {
-        public BookRepository(TestContext context) : base(context)
+        public BookRepository(BookLibraryContext context) : base(context)
         {
         }
 

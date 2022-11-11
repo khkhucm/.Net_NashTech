@@ -7,9 +7,9 @@ namespace Test.Data.Repositories.Implements
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         protected readonly DbSet<T> _dbSet;
-        private readonly TestContext _context;
+        private readonly BookLibraryContext _context;
 
-        public BaseRepository(TestContext context)
+        public BaseRepository(BookLibraryContext context)
         {
             _dbSet = context.Set<T>();
             _context = context;

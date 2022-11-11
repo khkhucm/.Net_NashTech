@@ -10,10 +10,10 @@ namespace Test.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DetailId { get; set; }
         public RequestBookDetailStatus Status { get; set; } = RequestBookDetailStatus.Waiting;
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
         public int RequestId { get; set; }
-        public BookRequest BookRequest { get; set; }
-        public Book Book { get; set; }
+        public BookRequest? BookRequest { get; set; }
+        public int BookId { get; set; }
+        public Book? Book { get; set; }
     }
 }

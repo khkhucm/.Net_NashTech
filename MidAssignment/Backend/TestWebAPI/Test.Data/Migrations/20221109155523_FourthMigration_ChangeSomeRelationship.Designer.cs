@@ -11,7 +11,7 @@ using Test.Data;
 
 namespace Test.Data.Migrations
 {
-    [DbContext(typeof(TestContext))]
+    [DbContext(typeof(BookLibraryContext))]
     [Migration("20221109155523_FourthMigration_ChangeSomeRelationship")]
     partial class FourthMigration_ChangeSomeRelationship
     {

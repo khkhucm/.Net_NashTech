@@ -10,7 +10,7 @@ using Test.Data;
 
 namespace Test.Data.Migrations
 {
-    [DbContext(typeof(TestContext))]
+    [DbContext(typeof(BookLibraryContext))]
     partial class TestContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -99,7 +99,7 @@ namespace Test.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RequestId"), 1L, 1);
 
-                    b.Property<int?>("ApprovalModifiedById")
+                    b.Property<int?>("ApprovalById")
                         .HasColumnType("int");
 
                     b.Property<int?>("BookId")
@@ -116,13 +116,40 @@ namespace Test.Data.Migrations
 
                     b.HasKey("RequestId");
 
-                    b.HasIndex("ApprovalModifiedById");
+                    b.HasIndex("ApprovalById")
+                        .IsUnique()
+                        .HasFilter("[ApprovalById] IS NOT NULL");
 
                     b.HasIndex("BookId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("BookRequests", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RequestId = 1,
+                            RequestedDate = new DateTime(2022, 11, 11, 10, 10, 57, 218, DateTimeKind.Local).AddTicks(820),
+                            Status = 0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            RequestId = 2,
+                            ApprovalById = 3,
+                            RequestedDate = new DateTime(2022, 11, 11, 10, 10, 57, 218, DateTimeKind.Local).AddTicks(836),
+                            Status = 0,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            RequestId = 3,
+                            ApprovalById = 4,
+                            RequestedDate = new DateTime(2022, 11, 11, 10, 10, 57, 218, DateTimeKind.Local).AddTicks(838),
+                            Status = 1,
+                            UserId = 2
+                        });
                 });
 
             modelBuilder.Entity("Test.Data.Entities.BookRequestDetail", b =>
@@ -136,16 +163,10 @@ namespace Test.Data.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BookRequestRequestId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("RequestId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
@@ -155,9 +176,33 @@ namespace Test.Data.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("BookRequestRequestId");
+                    b.HasIndex("RequestId");
 
                     b.ToTable("BookRequestDetails", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            DetailId = 1,
+                            BookId = 3,
+                            RequestId = 1,
+                            Status = 0
+                        },
+                        new
+                        {
+                            DetailId = 2,
+                            BookId = 3,
+                            RequestId = 2,
+                            Status = 1
+                        },
+                        new
+                        {
+                            DetailId = 3,
+                            BookId = 4,
+                            RequestId = 3,
+                            ReturnDate = new DateTime(2022, 11, 11, 10, 10, 57, 218, DateTimeKind.Local).AddTicks(860),
+                            Status = 2
+                        });
                 });
 
             modelBuilder.Entity("Test.Data.Entities.Category", b =>
@@ -278,9 +323,9 @@ namespace Test.Data.Migrations
 
             modelBuilder.Entity("Test.Data.Entities.BookRequest", b =>
                 {
-                    b.HasOne("Test.Data.Entities.User", "ApprovalModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("ApprovalModifiedById");
+                    b.HasOne("Test.Data.Entities.User", "ApprovalModifiedByUser")
+                        .WithOne("ApprovalRequests")
+                        .HasForeignKey("Test.Data.Entities.BookRequest", "ApprovalById");
 
                     b.HasOne("Test.Data.Entities.Book", null)
                         .WithMany("BookRequests")
@@ -292,7 +337,7 @@ namespace Test.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApprovalModifiedBy");
+                    b.Navigation("ApprovalModifiedByUser");
 
                     b.Navigation("RequestedByUser");
                 });
@@ -307,7 +352,7 @@ namespace Test.Data.Migrations
 
                     b.HasOne("Test.Data.Entities.BookRequest", "BookRequest")
                         .WithMany("BookRequestDetails")
-                        .HasForeignKey("BookRequestRequestId")
+                        .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -333,6 +378,8 @@ namespace Test.Data.Migrations
 
             modelBuilder.Entity("Test.Data.Entities.User", b =>
                 {
+                    b.Navigation("ApprovalRequests");
+
                     b.Navigation("BookRequests");
                 });
 #pragma warning restore 612, 618
