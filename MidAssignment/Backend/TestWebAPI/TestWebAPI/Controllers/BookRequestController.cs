@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TestWebAPI.DTOs.BookRequest;
 using TestWebAPI.Services.Interfaces;
 
 namespace TestWebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BookRequestController : ControllerBase
@@ -16,6 +18,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin, NormalUser")]
         public IActionResult Create([FromBody] CreateBookRequestRequest bookRequestCreateModel)
         {
             if (bookRequestCreateModel == null) return BadRequest();
@@ -33,6 +36,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin, NormalUser")]
         public IActionResult GetAll()
         {
             try
@@ -48,6 +52,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "SuperAdmin, NormalUser")]
         public IActionResult GetById(int id)
         {
             try
@@ -63,6 +68,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Update(int id, [FromBody] ApprovalBookRequestRequest bookRequestUpdateModel)
         {
             if (bookRequestUpdateModel == null) return BadRequest();

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TestWebAPI.DTOs.Category;
 using TestWebAPI.Services.Interfaces;
 
 namespace TestWebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -16,6 +18,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Create([FromBody] CreateCategoryRequest categoryCreateModel)
         {
             if (categoryCreateModel == null) return BadRequest();
@@ -34,6 +37,7 @@ namespace TestWebAPI.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin, NormalUser")]
         public IActionResult GetAll()
         {
             try
@@ -49,6 +53,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "SuperAdmin, NormalUser")]
         public IActionResult Get(int id)
         {
             try
@@ -64,6 +69,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult Delete(int id)
         {
             var message = "Delete succeeded";
@@ -81,6 +87,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpPut("softdelete/{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult SoftDelete(int id)
         {
             var message = "Delete succeeded";
@@ -98,6 +105,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Update(int id, [FromBody] UpdateCategoryRequest categoryUpdateModel)
         {
             if (categoryUpdateModel == null) return BadRequest();

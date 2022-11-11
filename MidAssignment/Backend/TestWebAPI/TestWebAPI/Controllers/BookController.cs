@@ -20,6 +20,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Create([FromBody] CreateBookRequest bookCreateModel)
         {
             if (bookCreateModel == null) return BadRequest();
@@ -37,7 +38,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin, NormalUser")]
         public IActionResult GetAll()
         {
             try
@@ -52,7 +53,9 @@ namespace TestWebAPI.Controllers
             }
         }
 
+        
         [HttpGet("{id}")]
+        [Authorize(Roles = "SuperAdmin, NormalUser")]
         public IActionResult GetById(int id)
         {
             try
@@ -66,7 +69,7 @@ namespace TestWebAPI.Controllers
                 return BadRequest("Bad request");
             }
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] UpdateBookRequest bookUpdateModel)
         {
@@ -85,6 +88,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult Delete(int id)
         {
             var message = "Delete succeeded";
@@ -103,6 +107,7 @@ namespace TestWebAPI.Controllers
 
 
         [HttpPut("softdelete/{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult SoftDelete(int id)
         {
             var message = "Delete succeeded";
@@ -120,6 +125,7 @@ namespace TestWebAPI.Controllers
         }
 
         [HttpGet("query")]
+        [Authorize(Roles = "SuperAdmin, NormalUser")]
         public ActionResult GetBookQuery(int page, int pageSize, string? name, int? categoryId, SortEnum? sort)
         {
             var queryModel = new PaginationQueryModel
