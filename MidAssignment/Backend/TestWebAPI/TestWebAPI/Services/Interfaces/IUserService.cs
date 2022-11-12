@@ -6,5 +6,6 @@ namespace TestWebAPI.Services.Interfaces
     public interface IUserService
     {
         LoginResponse? LoginUser(LoginRequest loginRequest);
+        UserModel? GetUserById(int id);
     }
 }

@@ -14,6 +14,22 @@ namespace TestWebAPI.Services.Implements
             _userRepository = userRepository;
         }
 
+        public UserModel? GetUserById(int id)
+        {
+            var user = _userRepository.Get(user => user.Id == id);
+
+            if (user != null)
+            {
+                return new UserModel
+                {
+                    Id = user.Id,
+                    Role = user.Role
+                };
+            }
+
+            return null;
+        }
+
         public LoginResponse? LoginUser(LoginRequest loginRequest)
         {
             var user = _userRepository.Get(x => x.UserName.ToLower() == loginRequest.Username.Trim().ToLower()

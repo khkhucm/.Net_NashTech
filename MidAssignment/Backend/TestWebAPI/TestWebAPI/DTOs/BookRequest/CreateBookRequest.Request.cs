@@ -7,6 +7,6 @@ namespace TestWebAPI.DTOs.BookRequest
     {
         [Required] 
         public List<int> BookIds { get; set; }
-        public UserModel? Requester { get; set; }
+        //public UserModel? Requester { get; set; }
     }
 }

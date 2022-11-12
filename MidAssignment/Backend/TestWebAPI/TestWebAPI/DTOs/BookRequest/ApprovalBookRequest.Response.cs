@@ -1,4 +1,5 @@
 ﻿using TestWebAPI.DTOs.BookRequestDetail;
+using TestWebAPI.DTOs.User;
 
 namespace TestWebAPI.DTOs.BookRequest
 {
@@ -9,6 +10,7 @@ namespace TestWebAPI.DTOs.BookRequest
         public int RequestedUserId { get; set; }
         public DateTime? RequestedDate { get; set; }
         public IEnumerable<BookRequestDetailModel?> BookRequestDetails { get; set; }
+       // public int? ApproveById { get; set; }
 
         public ApprovalBookRequestResponse(Test.Data.Entities.BookRequest request)
         {
@@ -22,6 +24,12 @@ namespace TestWebAPI.DTOs.BookRequest
                 BookId = entity.BookId,
                 Status = entity.Status.ToString()
             });
+            //ApproveById = request.ApprovalById;
+            //ApproveUser = new UserModel
+            //{
+            //    Id = request.ApprovalModifiedByUser.Id,
+            //    Role = request.ApprovalModifiedByUser.Role,
+            //};
         }
     }
 }

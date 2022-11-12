@@ -52,5 +52,20 @@ namespace TestWebAPI.Controllers
 
             return Ok(tokenString);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            try
+            {
+                var data = _usersService.GetUserById(id);
+
+                return data != null ? Ok(data) : NotFound();
+            }
+            catch
+            {
+                return BadRequest("Bad request");
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Test.Data.Entities;
 using Test.Data.Repositories.Interfaces;
 using TestWebAPI.DTOs.BookRequest;
+using TestWebAPI.DTOs.User;
 using TestWebAPI.Services.Interfaces;
 
 namespace TestWebAPI.Services.Implements
@@ -18,20 +19,22 @@ namespace TestWebAPI.Services.Implements
             _userRepository = userRepository;
         }
 
-        public ApprovalBookRequestResponse? Approval(int id, ApprovalBookRequestRequest requestModel)
+        public ApprovalBookRequestResponse? Approval(int id, ApprovalBookRequestRequest requestModel, UserModel approver)
         {
             using var transaction = _bookRequestRepository.DatabaseTransaction();
 
-            var user = _userRepository.Get(u => u.Id == requestModel.Approver.Id);
-
             try
             {
+                var user = _userRepository.Get(u => u.Id == approver.Id);
+
                 var borrowingRequest = _bookRequestRepository.Get(br => br.RequestId == id);
 
-                if (borrowingRequest != null || borrowingRequest.Status == RequestBookStatus.Waiting)
+                if (borrowingRequest != null && borrowingRequest.Status == RequestBookStatus.Waiting)
                 {
                     borrowingRequest.Status = requestModel.Status;
                     borrowingRequest.ApprovalModifiedByUser = user;
+                    borrowingRequest.ApprovalById = user?.Id;
+                    borrowingRequest.UserId = 1;
 
                     _bookRequestRepository.Update(borrowingRequest);
                     _bookRequestRepository.SaveChanges();
@@ -50,7 +53,7 @@ namespace TestWebAPI.Services.Implements
             }
         }
 
-        public CreateBookRequestResponse? Create(CreateBookRequestRequest addModel)
+        public CreateBookRequestResponse? Create(CreateBookRequestRequest addModel, UserModel requester)
         {
             using var transaction = _bookRequestRepository.DatabaseTransaction();
 
@@ -67,7 +70,7 @@ namespace TestWebAPI.Services.Implements
 
                     var newBookRequest = new BookRequest
                     {
-                        UserId = addModel.Requester.Id,
+                        UserId = requester.Id,
                         RequestedDate = DateTime.Now,
                         BookRequestDetails = bookRequestDetails,
                     };

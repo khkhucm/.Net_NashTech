@@ -8,6 +8,6 @@ namespace TestWebAPI.DTOs.BookRequest
     {
         [Required]
         public RequestBookStatus Status { get; set; }
-        public UserModel? Approver { get; set; }
+        //public UserModel? Approver { get; set; }
     }
 }
