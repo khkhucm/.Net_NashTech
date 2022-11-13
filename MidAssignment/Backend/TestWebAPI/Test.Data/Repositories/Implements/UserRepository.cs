@@ -10,9 +10,9 @@ namespace Test.Data.Repositories.Implements
         {
         }
 
-        //public override User? Get(Expression<Func<User, bool>> predicate)
-        //{
-        //    return predicate == null ? _dbSet.SingleOrDefault() : _dbSet.SingleOrDefault(predicate);
-        //}
+        public override User? Get(Expression<Func<User, bool>> predicate)
+        {
+            return predicate == null ? _dbSet.SingleOrDefault() : _dbSet.SingleOrDefault(predicate);
+        }
     }
 }

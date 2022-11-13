@@ -10,12 +10,14 @@ function App() {
   return (
     <div className=''>
       <Routes>
+      <Route path='/login' element={<Login />} />
         <Route element={<Layout />}>
           <Route path='/' element={<Home />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/books' element={<Books />} />
-          <Route path='/login' element={<Login />} />
+          
         </Route>
+        
       </Routes>
     </div>
   );

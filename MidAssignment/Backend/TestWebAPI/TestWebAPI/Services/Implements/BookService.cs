@@ -59,8 +59,8 @@ namespace TestWebAPI.Services.Implements
                         Category = categoryModel
                     };
                 }
-                return null;
 
+                return null;
             }
             catch
             {
