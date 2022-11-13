@@ -32,9 +32,9 @@ namespace TestWebAPI.Services.Implements
                 if (borrowingRequest != null && borrowingRequest.Status == RequestBookStatus.Waiting)
                 {
                     borrowingRequest.Status = requestModel.Status;
-                    borrowingRequest.ApprovalModifiedByUser = user;
-                    borrowingRequest.ApprovalById = user?.Id;
-                    borrowingRequest.UserId = 1;
+                   // borrowingRequest.ApprovalModifiedByUser = null;
+                    borrowingRequest.ApprovalById = user!.Id;
+                    //borrowingRequest.UserId = 1;
 
                     _bookRequestRepository.Update(borrowingRequest);
                     _bookRequestRepository.SaveChanges();

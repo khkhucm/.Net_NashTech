@@ -116,9 +116,7 @@ namespace Test.Data.Migrations
 
                     b.HasKey("RequestId");
 
-                    b.HasIndex("ApprovalById")
-                        .IsUnique()
-                        .HasFilter("[ApprovalById] IS NOT NULL");
+                    b.HasIndex("ApprovalById");
 
                     b.HasIndex("BookId");
 
@@ -130,7 +128,7 @@ namespace Test.Data.Migrations
                         new
                         {
                             RequestId = 1,
-                            RequestedDate = new DateTime(2022, 11, 11, 10, 10, 57, 218, DateTimeKind.Local).AddTicks(820),
+                            RequestedDate = new DateTime(2022, 11, 14, 0, 2, 59, 90, DateTimeKind.Local).AddTicks(3854),
                             Status = 0,
                             UserId = 1
                         },
@@ -138,16 +136,16 @@ namespace Test.Data.Migrations
                         {
                             RequestId = 2,
                             ApprovalById = 3,
-                            RequestedDate = new DateTime(2022, 11, 11, 10, 10, 57, 218, DateTimeKind.Local).AddTicks(836),
-                            Status = 0,
+                            RequestedDate = new DateTime(2022, 11, 14, 0, 2, 59, 90, DateTimeKind.Local).AddTicks(3866),
+                            Status = 1,
                             UserId = 2
                         },
                         new
                         {
                             RequestId = 3,
                             ApprovalById = 4,
-                            RequestedDate = new DateTime(2022, 11, 11, 10, 10, 57, 218, DateTimeKind.Local).AddTicks(838),
-                            Status = 1,
+                            RequestedDate = new DateTime(2022, 11, 14, 0, 2, 59, 90, DateTimeKind.Local).AddTicks(3868),
+                            Status = 2,
                             UserId = 2
                         });
                 });
@@ -200,7 +198,7 @@ namespace Test.Data.Migrations
                             DetailId = 3,
                             BookId = 4,
                             RequestId = 3,
-                            ReturnDate = new DateTime(2022, 11, 11, 10, 10, 57, 218, DateTimeKind.Local).AddTicks(860),
+                            ReturnDate = new DateTime(2022, 11, 14, 0, 2, 59, 90, DateTimeKind.Local).AddTicks(3885),
                             Status = 2
                         });
                 });
@@ -324,8 +322,8 @@ namespace Test.Data.Migrations
             modelBuilder.Entity("Test.Data.Entities.BookRequest", b =>
                 {
                     b.HasOne("Test.Data.Entities.User", "ApprovalModifiedByUser")
-                        .WithOne("ApprovalRequests")
-                        .HasForeignKey("Test.Data.Entities.BookRequest", "ApprovalById");
+                        .WithMany("ApprovalRequests")
+                        .HasForeignKey("ApprovalById");
 
                     b.HasOne("Test.Data.Entities.Book", null)
                         .WithMany("BookRequests")

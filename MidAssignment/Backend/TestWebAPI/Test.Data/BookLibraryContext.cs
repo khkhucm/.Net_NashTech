@@ -61,9 +61,9 @@ namespace Test.Data
                 .HasForeignKey(br => br.UserId);
 
             builder.Entity<User>()
-                .HasOne(u => u.ApprovalRequests)
+                .HasMany(u => u.ApprovalRequests)
                 .WithOne(br => br.ApprovalModifiedByUser)
-                .HasForeignKey<BookRequest>(br => br.ApprovalById);
+                .HasForeignKey(br => br.ApprovalById);
         }
 
         private void SeedData(ModelBuilder builder)

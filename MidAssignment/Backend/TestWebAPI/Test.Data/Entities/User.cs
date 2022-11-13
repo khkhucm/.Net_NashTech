@@ -16,6 +16,6 @@ namespace Test.Data.Entities
         public string? Password { get; set; }
         public UserRoleEnum Role { get; set; }
         public ICollection<BookRequest>? BookRequests { get; set; }
-        public BookRequest? ApprovalRequests { get; set; }
+        public ICollection<BookRequest>? ApprovalRequests { get; set; }
     }
 }
