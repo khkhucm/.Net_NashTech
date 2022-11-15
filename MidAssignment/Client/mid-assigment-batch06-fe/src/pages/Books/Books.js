@@ -26,7 +26,7 @@ function Books() {
                 <Column title="Id" dataIndex="id" key={book.id} />
 
                 <Column
-                    title="Bood Name"
+                    title="Book Name"
                     dataIndex="name"
                     key={book.name}
                 />
@@ -45,7 +45,7 @@ function Books() {
 
                 {/* <Column title="Gender" dataIndex="gender" key={book.gender} /> */}
 
-                {/* <Column
+                <Column
                     title="Action"
                     key="action"
                     render={(_, record) => (
@@ -71,7 +71,7 @@ function Books() {
                             </button>
                         </Space>
                     )}
-                /> */}
+                />
             </Table>
         </div>
     );

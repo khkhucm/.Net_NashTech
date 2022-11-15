@@ -2,6 +2,7 @@
 using Test.Data.Entities;
 using Test.Data.Repositories.Interfaces;
 using TestWebAPI.DTOs.BookRequest;
+using TestWebAPI.DTOs.BookRequestDetail;
 using TestWebAPI.DTOs.User;
 using TestWebAPI.Services.Interfaces;
 
@@ -12,11 +13,13 @@ namespace TestWebAPI.Services.Implements
         private readonly IBookRequestRepository _bookRequestRepository;
         private readonly IBookRepository _bookRepository;
         private readonly IUserRepository _userRepository;
-        public BookRequestService(IBookRequestRepository bookRequestRepository, IBookRepository bookRepository, IUserRepository userRepository)
+        private readonly IBookRequestDetailRepository _bookRequestDetailRepository;
+        public BookRequestService(IBookRequestRepository bookRequestRepository, IBookRepository bookRepository, IUserRepository userRepository, IBookRequestDetailRepository bookRequestDetailRepository)
         {
             _bookRequestRepository = bookRequestRepository;
             _bookRepository = bookRepository;
             _userRepository = userRepository;
+            _bookRequestDetailRepository = bookRequestDetailRepository;
         }
 
         public ApprovalBookRequestResponse? Approval(int id, ApprovalBookRequestRequest requestModel, UserModel approver)
@@ -113,6 +116,32 @@ namespace TestWebAPI.Services.Implements
             }
 
             return new GetBookRequest(bookRequest);
+        }
+
+        public BookRequestDetail? UpdateBookRequestDetail(UpdateBookRequestDetailModel requestModel)
+        {
+            var bookRequestDetail = _bookRequestDetailRepository.Get(b => b.RequestId == requestModel.Id);
+
+            if(bookRequestDetail == null)
+            {
+                return null;
+            }
+
+            bookRequestDetail.Status = requestModel.Status;
+
+            if(bookRequestDetail.Status == RequestBookDetailStatus.Returned)
+            {
+                bookRequestDetail.ReturnDate = DateTime.Now;
+            }
+            else
+            {
+                bookRequestDetail.ReturnDate = null;
+            }
+
+            _bookRequestDetailRepository.Update(bookRequestDetail);
+            _bookRequestDetailRepository.SaveChanges();
+
+            return bookRequestDetail; 
         }
     }
 }

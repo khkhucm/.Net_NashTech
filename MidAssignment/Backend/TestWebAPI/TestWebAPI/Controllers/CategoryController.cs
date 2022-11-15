@@ -37,7 +37,7 @@ namespace TestWebAPI.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin, NormalUser")]
+        [AllowAnonymous]
         public IActionResult GetAll()
         {
             try

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TestWebAPI.DTOs.BookRequest;
+using TestWebAPI.DTOs.BookRequestDetail;
 using TestWebAPI.Services.Interfaces;
 
 namespace TestWebAPI.Controllers
@@ -112,6 +113,45 @@ namespace TestWebAPI.Controllers
 
                     return NotFound();
                 }
+            }
+            catch
+            {
+                return BadRequest("Bad request");
+            }
+        }
+
+        [HttpPut("book-request-detail")]
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult UpdateBookRequestDetail([FromBody] UpdateBookRequestDetailModel requestModel)
+        {
+            if (requestModel == null) return BadRequest();
+
+            try
+            {
+
+                var result = _bookRequestService.UpdateBookRequestDetail(requestModel);
+
+                return result != null ? Ok(result) : BadRequest("Bad request");
+
+                //var userId = this.GetCurrentLoginUserId();
+
+                //if (userId == null)
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                //    var user = _userService.GetUserById(userId.Value);
+
+                //    if (user != null)
+                //    {
+                //        var data = _bookRequestService.Approval(id, requestModel, user);
+
+                //        return data != null ? Ok(data) : BadRequest("Bad request");
+                //    }
+
+                //    return NotFound();
+                //}
             }
             catch
             {

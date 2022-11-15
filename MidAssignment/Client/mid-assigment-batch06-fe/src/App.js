@@ -5,6 +5,7 @@ import Profile from './pages/Profile/Profile';
 import './App.css'
 import Layout from './components/layout';
 import Books from './pages/Books/Books';
+import Categories from './pages/Categories/Categories';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/books' element={<Books />} />
-          
+          <Route path='/categories' element={<Categories/>}/>
         </Route>
         
       </Routes>

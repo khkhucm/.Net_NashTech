@@ -13,10 +13,10 @@ function Layout() {
                             <Link to='/profile'>Profile</Link>
                         </li>
                         <li>
-                            <Link to='/students'>Students</Link>
+                            <Link to='/books'>Books</Link>
                         </li>
                         <li>
-                            <Link to='/books'>Books</Link>
+                            <Link to='/categories'>Categories</Link>
                         </li>
                         <li>
                             <Link to='/login'>Login</Link>
